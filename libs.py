@@ -18,7 +18,7 @@ class Tracker:
                 reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
                 for row in reader:
                     try:
-                        local_dict = {'date': datetime.datetime.strptime(row[0], '%Y-%m-%d'), 'category': str(row[1]),
+                        local_dict = {'date': datetime.datetime.strptime(row[0], '%Y-%m-%d').date(), 'category': str(row[1]),
                                       'amount': float(row[2]), 'description': str(row[3])
                                       }
                         self.expenses.append(local_dict)
@@ -53,7 +53,7 @@ class Tracker:
 
         for expense in self.expenses:
             if expense['date'] and expense['category'] and expense['amount'] and expense['description']:
-                print(f"Date: {expense['date'].date()}, Category: {expense['category']}, Amount: {expense['amount']}, Description: {expense['description']}")
+                print(f"Date: {expense['date']}, Category: {expense['category']}, Amount: {expense['amount']}, Description: {expense['description']}")
             else:
                 print(f"Invalid expense entry! {expense}")
 
@@ -68,7 +68,7 @@ class Tracker:
         print(f"Total expense = {total_expense}")
 
         if total_expense > monthly_budget:
-            print(f"WARNING: Total expense amount {total_expense} had breached the monthly budget of {monthly_budget}!")
+            print(f"WARNING: Total expense amount {total_expense} has breached the monthly budget of {monthly_budget}!")
         else:
             print(f"Remaining Balance: {monthly_budget - total_expense}")
 
